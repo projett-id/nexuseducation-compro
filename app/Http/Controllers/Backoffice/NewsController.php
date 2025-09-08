@@ -32,7 +32,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
             'status' => 'required|in:draft,published,archived',
             'tags' => 'required|array'
         ]);
@@ -72,7 +72,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'status' => 'required|in:draft,published,archived',
             'tags' => 'array'
         ]);
@@ -105,5 +105,35 @@ class NewsController extends Controller
     {
         $news->delete();
         return redirect()->route('news.index')->with('success', 'News deleted successfully.');
+    }
+
+    public function indexFE(Request $request)
+    {
+        $tags = Tag::all();
+        $categories = Category::all();
+        $query = News::query();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', "%{$request->search}%");
+        }
+
+        if ($request->filled('categories')) {
+            $query->whereIn('category_id', $request->categories);
+        }
+
+        if ($request->filled('tags')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->whereIn('tags.id', $request->tags);
+            });
+        }
+
+        $news = $query->latest()->paginate(10)->appends($request->all());
+        return view('frontend.news.index', compact('news', 'tags','categories'));
+    }
+
+    public function detailFE($slug)
+    {
+        $news = News::where('slug', $slug)->firstOrFail();
+        return view('frontend.news.detail', compact('news'));
     }
 }

@@ -1,11 +1,11 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<form class="card" action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
-    <div class="card-header">Create</div>
+<form class="card" action="{{ route('event.update', $event->id) }}" method="POST" enctype="multipart/form-data">
+    <div class="card-header">Update</div>
     <div class="card-body">
         @csrf
-
+        @method('PUT')
         <div class="mb-3">
             <label>Category</label>
             <select name="category_id" class="form-control">
@@ -55,6 +55,12 @@
         </div>
 
         <div class="mb-3">
+            <label>Description</label>
+            <textarea name="description" class="form-control tinymce" rows="5">{{ $event->description }}</textarea>
+            @error('description') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+
+        <div class="mb-3">
             <label>Thumbnail</label>
             <input type="file" name="thumbnail" class="form-control">
             @if($event->thumbnail)
@@ -81,7 +87,7 @@
                     $selectedTags = old('tags', $event->tags->pluck('id')->toArray());
                 @endphp
                 @foreach($tags as $tag)
-                    <option value="{{ $event->id }}"
+                    <option value="{{ $tag->id }}"
                         {{ in_array($tag->id, $selectedTags) ? 'selected' : '' }}>
                         {{ $tag->name }}
                     </option>

@@ -44,6 +44,18 @@ return [
         'permission' => 'event.view',
     ],
     [
+        'title' => 'Req. Partner',
+        'icon'  => 'bi bi-database',
+        'route' => 'data-partner',
+        'permission' => 'data-partner',
+    ],
+    [
+        'title' => 'Req. Journey',
+        'icon'  => 'bi bi-database',
+        'route' => 'data-journey',
+        'permission' => 'data-journey',
+    ],
+    [
         'title' => 'Sysadmin',
         'icon'  => 'bi bi-gear',
         'permission' => null,

@@ -12,8 +12,8 @@
             </div>
             <div class="row">
                 <div class="hero-buttons" style="display:inline">
-                    <a href="#courses" class="btn btn-primary" style="margin-top:5px">Start Your Journey</a>
-                    <a href="#courses" class="btn btn-primary" style="margin-top:5px">Partner with Us</a>
+                  <a href="{{ route('start-your-journey-url') }}" class="btn btn-primary" style="margin-top:5px">Start Your Journey</a>
+                  <a href="{{ route('partner-us-url') }}" class="btn btn-primary" style="margin-top:5px">Partner with Us</a>
                 </div>
             </div>
 
@@ -178,7 +178,7 @@
     <div class="row g-4 justify-content-center">
       @foreach($countries as $country)
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
-        <a href="#" class="category-card category-tech">
+        <a href="{{route('fe.country.detail',['name'=>$country->name]) }}" class="category-card category-tech">
           <div class="category-icon" style="
                 background: url('{{asset('storage/'.$country->flag)}}');
                 background-repeat: no-repeat;
@@ -318,17 +318,15 @@
           <div class="course-card">
             <div class="course-image">
               <img src="{{ asset('storage/'.$dt->thumbnail) }}" alt="Course" class="img-fluid">
-              <!-- <div class="badge featured">{{$dt->status}}</div> -->
               <div class="price-badge">{{$dt->status}}</div>
             </div>
             <div class="course-content">
-              <h3><a href="#">{{$dt->title}}</a></h3>
+              <h3><a href="{{ route('fe.event.detail',['slug'=>$dt->slug]) }}">{{$dt->title}}</a></h3>
               <p>{{ \Illuminate\Support\Str::limit(strip_tags($dt->description), 255, '...') }}</p>
               <div class="instructor">
                 <img src="assets/img/person/png-clipart-user-computer-icons-person-icon-cdr-logo.png" alt="Instructor" class="instructor-img">
                 <div class="instructor-info">
                   <h6>{{ $dt->organizer->name}}</h6>
-                  <!-- <span>{{ $dt->created}}</span> -->
                 </div>
               </div>
               <!-- <div class="course-stats">
@@ -349,11 +347,11 @@
             </div> -->
           </div>
         </div>
+      </div>
       @endforeach      
-    </div>
 
     <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
-      <a href="events.html" class="btn-more">View All Event</a>
+      <a href="{{ route('fe.event') }}" class="btn-more">View All Event</a>
     </div>
   </div>
 </section>
@@ -384,6 +382,9 @@
           </div>
       </div>
       @endforeach
+      <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
+        <a href="{{ route('fe.news') }}" class="btn-more">View All News</a>
+      </div>
     </div>
   </div>
 </section>

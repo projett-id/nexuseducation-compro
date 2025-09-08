@@ -50,6 +50,20 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <style>
+      body {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 400; /* Regular */
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700; /* Bold */
+      }
+    </style>
+    @stack('styles')
   </head>
   <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
     <div class="app-wrapper">
@@ -73,13 +87,13 @@
         <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
+              <!-- <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partner_schools', function (Blueprint $table) {
+        Schema::create('request_partner_us', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')
-                    ->nullable()
-                    ->constrained('countries')
-                    ->nullOnDelete();
-            $table->string('logo');
             $table->string('name');
-            $table->longText('content');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('organization_name')->nullable();
+            $table->longtext('message')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partner_schools');   
+        Schema::dropIfExists('request_partner_us');
     }
 };

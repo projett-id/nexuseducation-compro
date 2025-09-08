@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Country;
+use App\Models\Visa;
+use App\Models\ProgramTypes;
 
 class CountryController extends Controller
 {
@@ -62,5 +65,18 @@ class CountryController extends Controller
     {
         $country->delete();
         return redirect()->route('country.index')->with('success', 'Country deleted successfully.');
+    }
+
+    public function detailFE($name)
+    {
+        // Convert slug back to readable name if needed
+        $countryName = str_replace('-', ' ', $name);
+        // Example: find by name
+        $country = Country::whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [Str::lower($countryName)])->with(['visas', 'programs'])->firstOrFail();
+        // $visa = Visa::where('country_id', $country->id)->get();
+        // $program = ProgramTypes::where('country_id', $country->id)->get();
+
+
+        return view('frontend.country.detail', compact('country'));
     }
 }

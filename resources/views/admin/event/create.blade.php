@@ -50,13 +50,13 @@
             <div class="col-md-6">
                 <input type="time" name="end_time" class="form-control" value="{{ old('end_time') }}">
             </div>
-            @error('start_date') <small class="text-danger">{{ $message }}</small> @enderror
+            @error('end_date') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">
             <label>Description</label>
             <textarea name="description" class="form-control tinymce" rows="5">{{ old('description') }}</textarea>
-            @error('content') <small class="text-danger">{{ $message }}</small> @enderror
+            @error('description') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">

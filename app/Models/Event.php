@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -17,16 +18,37 @@ class Event extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Categories::class);
     }
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'events_tag');
+        return $this->belongsToMany(Tag::class, 'events_tag', 'event_id', 'tag_id');
     }
+
 
     public function organizer()
     {
         return $this->belongsTo(User::class, 'organizer_id');
+    }
+
+    public function getFormattedScheduleAttribute()
+    {
+        $start = Carbon::parse($this->start_date);
+        $end   = Carbon::parse($this->end_date);
+
+        $startTime = $start->format('H:i') !== '00:00' ? ' | ' . $start->format('H:i') : '';
+        $endTime   = $end->format('H:i') !== '00:00' ? ' | ' . $end->format('H:i') : '';
+
+        if ($start->isSameDay($end)) {
+            if ($startTime && $endTime) {
+                return $start->format('F d, Y') . $startTime . ' - ' . $end->format('H:i');
+            }
+            return $start->format('F d, Y'); // no time
+        }
+
+        return $start->format('F d, Y') . $startTime .
+            ' - ' .
+            $end->format('F d, Y') . $endTime;
     }
 }

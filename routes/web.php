@@ -33,23 +33,38 @@ use App\Http\Controllers\Backoffice\ProgramTypeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/event', [EventController::class, 'indexFE'])->name('fe.event');
+Route::get('/event/{slug}', [EventController::class, 'detailFE'])->name('fe.event.detail');
+Route::get('/news', [NewsController::class, 'indexFE'])->name('fe.news');
+Route::get('/news/{slug}', [NewsController::class, 'detailFE'])->name('fe.news.detail');
+    
+Route::get('/country/{name}', [CountryController::class, 'detailFE'])
+    ->name('fe.country.detail')
+    ->where('name', '[A-Za-z0-9\-]+');
+
+Route::match(['get', 'post'], '/start-your-journey',[HomeController::class, 'start_your_journey'])->name('start-your-journey-url');
+Route::match(['get', 'post'], '/partner-with-us', [HomeController::class, 'partner_with_us'])->name('partner-us-url');
 
 Route::get('/dashboard', function () {
     return view('admin.layouts.app');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
-    Route::resource('roles', RoleController::class);
-    Route::resource('visa', VisaController::class);
-    Route::resource('program-types', ProgramTypeController::class);
-    Route::resource('partner-school', PartnerSchoolController::class);
-    Route::resource('country', CountryController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('news', NewsController::class);
-    Route::resource('event', EventController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('tags', TagController::class);
+Route::prefix('backoffice')
+    ->middleware(['auth', 'role:superadmin|admin'])
+    ->group(function () {
+        Route::resource('roles', RoleController::class);
+        Route::resource('visa', VisaController::class);
+        Route::resource('program-types', ProgramTypeController::class);
+        Route::resource('partner-school', PartnerSchoolController::class);
+        Route::resource('country', CountryController::class);
+        Route::resource('permissions', PermissionController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('news', NewsController::class);
+        Route::resource('event', EventController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('tags', TagController::class);
+        Route::get('data-journey', [HomeController::class,'listJourney'])->name('data-journey');
+        Route::get('data-partner', [HomeController::class,'listPartner'])->name('data-partner');
 });
 
 Route::middleware('auth')->group(function () {

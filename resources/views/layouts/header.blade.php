@@ -1,22 +1,22 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
-            <img src="assets/img/white-logo-horizontal.PNG" alt="">
+        <a href="{{route('home')}}" class="logo d-flex align-items-center me-auto">
+            <img src="{{asset('assets/img/white-logo-horizontal.PNG')}}" alt="">
         </a>
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="{{route('home')}}">Home</a></li>
-                <li class="dropdown"><a href="#"><span>Service</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <!-- <li class="dropdown"><a href="#"><span>Service</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                     <li><a href="#">Study Aboard</a></li>
                     <li><a href="#">Educational Tour</a></li>
                     <li><a href="#">Preparation Course</a></li>
                     <li><a href="#">Assessments</a></li>
                 </ul>
-                </li>
+                </li> -->
                 <li><a href="{{route('about')}}">About</a></li>
-                <li><a href="events.html">Event</a></li>
-                <li><a href="#">News</a></li>
+                <li><a href="{{route('fe.event')}}">Event</a></li>
+                <li><a href="{{route('fe.news')}}">News</a></li>
                 <!-- <li><a href="instructors.html">Instructors</a></li> -->
                 <!-- <li><a href="pricing.html">Pricing</a></li> -->
                 <!-- <li><a href="blog.html">Blog</a></li> -->

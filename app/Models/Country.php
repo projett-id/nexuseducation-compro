@@ -9,4 +9,15 @@ class Country extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'flag', 'status'];
+    // One country has many visas
+    public function visas()
+    {
+        return $this->hasMany(Visa::class);
+    }
+
+    // One country has many programs
+    public function programs()
+    {
+        return $this->hasMany(ProgramTypes::class);
+    }
 }

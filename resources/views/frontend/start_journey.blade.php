@@ -13,6 +13,9 @@
 </div>
 <section id="contact" class="contact section">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
         <div class="row justify-content-center">
           <div class="contact-content">
             <div class="contact-form-container" data-aos="fade-up" data-aos-delay="400">

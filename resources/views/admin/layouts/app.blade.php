@@ -7,17 +7,6 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-    <meta name="title" content="AdminLTE v4 | Dashboard" />
-    <meta name="author" content="ColorlibHQ" />
-    <meta
-      name="description"
-      content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance."
-    />
-    <meta
-      name="keywords"
-      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard, accessible admin panel, WCAG compliant"
-    />
-    <meta name="supported-color-schemes" content="light dark" />
     <link rel="preload" href="{{ asset('admin-theme/css/adminlte.css')}} " as="style" />
     <link
       rel="stylesheet"
@@ -70,13 +59,8 @@
       @include('admin.layouts.header')
       <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
         <div class="sidebar-brand">
-          <a href="./index.html" class="brand-link">
-            <img
-              src="{{ asset('admin-theme/assets/img/AdminLTELogo.png') }}"
-              alt="AdminLTE Logo"
-              class="brand-image opacity-75 shadow"
-            />
-            <span class="brand-text fw-light">AdminLTE 4</span>
+          <a href="#" class="brand-link">
+            <span class="brand-text fw-light">Nexus Education</span>
           </a>
         </div>
         <div class="sidebar-wrapper">
@@ -87,13 +71,6 @@
         <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <!-- <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                </ol>
-              </div> -->
             </div>
           </div>
         </div>

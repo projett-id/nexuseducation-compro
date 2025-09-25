@@ -8,19 +8,22 @@ use App\Models\Event;
 use App\Models\News;
 use App\Models\StartYourJourney;
 use App\Models\PartnerWithUs;
+use App\Models\About;
 class HomeController extends Controller
 {
     public function index()
     {
+        $about = About::first();
         $countries = Country::all();
         $event = Event::all();
         $news = News::all();
-        return view('home',compact('countries','event','news'));
+        return view('home',compact('countries','event','news','about'));
     }   
 
     public function about()
     {
-        return view('about');
+        $data = About::first();
+        return view('about',compact('data'));
     }   
 
     public function start_your_journey(Request $request)
@@ -82,5 +85,72 @@ class HomeController extends Controller
     {
         $data = PartnerWithUs::latest()->paginate(10);
         return view('admin.data_partner_us', compact('data'));
+    }
+
+    public function aboutForm(Request $request){
+        $data = About::first();
+        if($request->isMethod('post')){
+            $about = About::first();
+            $request->validate([
+                'address'=>'required',
+                'company_name'=>'required',
+                'proprietor'=>'required',
+                'contact_no'=>'required',
+                'email'=>'required',
+                'vision'=>'required',
+                'mission'=>'required',
+                'values'=>'required',
+                'about'=>'required',
+                'link_maps'=>'required'
+            ]);
+            $data = $request->all();
+
+            $values = [];
+
+            // decode old values from DB (JSON column)
+            $oldValues = $about->values ?? [];
+
+            foreach ($data['values'] as $index => $value) {
+                $item = [
+                    'name' => $value['name'] ?? null,
+                ];
+
+                if (isset($value['img']) && $value['img'] instanceof \Illuminate\Http\UploadedFile) {
+                    // delete old file if exists
+                    if (isset($oldValues[$index]['img'])) {
+                        \Storage::disk('public')->delete('values/' . $oldValues[$index]['img']);
+                    }
+
+                    // save new file
+                    $filename = time().'_'.$value['img']->getClientOriginalName();
+                    $value['img']->storeAs('values', $filename, 'public');
+                    $item['img'] = $filename;
+                } else {
+                    // keep the old image if no new upload
+                    if (isset($oldValues[$index]['img'])) {
+                        $item['img'] = $oldValues[$index]['img'];
+                    }
+                }
+
+                $values[] = $item;
+            }
+
+            $about->update([
+                'company_name' => $data['company_name'],
+                'proprietor'   => $data['proprietor'],
+                'contact_no'   => $data['contact_no'],
+                'email'        => $data['email'],
+                'address'      => $data['address'],
+                'link_maps'    => $data['link_maps'],
+                'about'        => $data['about'],
+                'vision'       => $data['vision'],
+                'mission'      => $data['mission'],
+                'values'       => $values, // will be stored as JSON
+            ]);
+
+            return back()->with('success', 'About updated successfully!');
+
+        }
+        return view('admin.aboutForm',compact('data'));
     }
 }

@@ -6,6 +6,11 @@
     <div class="card-body">
         @csrf
         <div class="mb-3">
+            <label>Banner Header</label>
+            <input type="file" name="banner_header" class="form-control">
+            @error('banner_header') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+        <div class="mb-3">
             <label>Country</label>
             <select name="country_id" class="form-control">
                 @foreach($country as $c)
@@ -15,14 +20,29 @@
             @error('country_id') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
         <div class="form-group mb-3">
-            <label>Section</label>
-            <input type="text" name="title" class="form-control" required autocomplete="off" value="{{ old('title') }}">
-            @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required autocomplete="off" value="{{ old('name') }}">
+            @error('name') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
         <div class="mb-3">
-            <label>Content</label>
-            <textarea name="content" class="form-control tinymce" rows="5">{{ old('content') }}</textarea>
-            @error('content') <small class="text-danger">{{ $message }}</small> @enderror
+            <label>Logo</label>
+            <input type="file" name="logo" class="form-control">
+            @error('logo') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+        <div class="mb-3">
+            <label>Location</label>
+            <input type="text" name="location" class="form-control" value="{{ old('name') }}">
+            @error('location') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+        <div class="mb-3">
+            <label>Link Website</label>
+            <input type="text" name="website" class="form-control" value="{{ old('website') }}">
+            @error('website') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+        <div class="mb-3">
+            <label>Link Maps</label>
+            <input type="text" name="maps" class="form-control" value="{{ old('maps') }}">
+            @error('maps') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
     </div>
     <div class="card-footer">

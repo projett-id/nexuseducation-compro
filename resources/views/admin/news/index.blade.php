@@ -39,7 +39,9 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $news->links() }}
+    </div>
+    <div class="card-footer">
+        {{ $news->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

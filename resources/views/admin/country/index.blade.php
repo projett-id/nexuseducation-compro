@@ -40,8 +40,9 @@
             @endforeach
         </tbody>
     </table>
-
-    {{ $country->links() }}
+    </div>
+    <div class="card-footer">
+        {{ $country->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

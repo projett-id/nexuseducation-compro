@@ -40,6 +40,8 @@
             </tbody>
         </table>
     </div>
-    {{ $event->links('pagination::bootstrap-5') }}
+    <div class="card-footer">
+        {{ $event->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 @endsection

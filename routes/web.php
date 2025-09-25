@@ -42,6 +42,10 @@ Route::get('/country/{name}', [CountryController::class, 'detailFE'])
     ->name('fe.country.detail')
     ->where('name', '[A-Za-z0-9\-]+');
 
+Route::get('/school/{name}', [PartnerSchoolController::class, 'detailFE'])
+    ->name('fe.school.detail')
+    ->where('name', '[A-Za-z0-9\-]+');
+
 Route::match(['get', 'post'], '/start-your-journey',[HomeController::class, 'start_your_journey'])->name('start-your-journey-url');
 Route::match(['get', 'post'], '/partner-with-us', [HomeController::class, 'partner_with_us'])->name('partner-us-url');
 
@@ -52,10 +56,23 @@ Route::get('/dashboard', function () {
 Route::prefix('backoffice')
     ->middleware(['auth', 'role:superadmin|admin'])
     ->group(function () {
+        Route::match(['get','post'],'about',[HomeController::class,'aboutForm'])->name('about.form');
         Route::resource('roles', RoleController::class);
         Route::resource('visa', VisaController::class);
         Route::resource('program-types', ProgramTypeController::class);
+        // Route::resource('partner-school', PartnerSchoolController::class);
+        Route::prefix('partner-school')->name('partner-school.')->group(function () {
+            Route::get('{partner_school}/detail/{detail?}', [PartnerSchoolController::class, 'detail'])
+                ->name('detail');
+            Route::post('{partner_school}/detail/{detail?}', [PartnerSchoolController::class, 'storeDetail'])
+                ->name('detail.store');
+            Route::delete('{partner_school}/detail/{detail}', [PartnerSchoolController::class, 'deleteDetail'])
+                ->name('detail.destroy');
+        });
+
         Route::resource('partner-school', PartnerSchoolController::class);
+
+
         Route::resource('country', CountryController::class);
         Route::resource('permissions', PermissionController::class);
         Route::resource('users', UserController::class);

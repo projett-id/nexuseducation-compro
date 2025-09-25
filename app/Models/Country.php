@@ -20,4 +20,9 @@ class Country extends Model
     {
         return $this->hasMany(ProgramTypes::class);
     }
+
+    public function partnerSchools()
+    {
+        return $this->hasMany(PartnerSchool::class, 'country_id');
+    }
 }

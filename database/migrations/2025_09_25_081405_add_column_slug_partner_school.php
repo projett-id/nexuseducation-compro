@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events_tag', function (Blueprint $table) {
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            $table->primary(['event_id', 'tag_id']);
-        });   
+        Schema::table('partner_schools', function (Blueprint $table) {
+            // add new fields
+            $table->string('slug')->nullable();
+        });
     }
 
     /**
@@ -23,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events_tag');
+        Schema::table('partner_schools', function (Blueprint $table) {
+            // rollback
+            $table->dropColumn(['slug']);
+        });
     }
 };

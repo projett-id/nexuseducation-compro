@@ -69,14 +69,8 @@ class CountryController extends Controller
 
     public function detailFE($name)
     {
-        // Convert slug back to readable name if needed
         $countryName = str_replace('-', ' ', $name);
-        // Example: find by name
         $country = Country::whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [Str::lower($countryName)])->with(['visas', 'programs'])->firstOrFail();
-        // $visa = Visa::where('country_id', $country->id)->get();
-        // $program = ProgramTypes::where('country_id', $country->id)->get();
-
-
         return view('frontend.country.detail', compact('country'));
     }
 }

@@ -41,6 +41,7 @@
                     <h3>Table of Contents</h3>
                     <nav>
                         <ul>
+                            <li>Partner Schools</li>
                             <li>Visa</li>
                             <ul>
                                 @foreach($country->visas as $visa)
@@ -58,6 +59,28 @@
                     </nav>
                 </aside>
                 <div class="article-content">
+                    <div class="content-section" id="partner-school" data-aos="fade-up">
+                        <h1>Our Partner School</h1>
+                        <table class="table">
+                            <thead>
+                                <th>Name</th>
+                                <th>Website</th>
+                                <th>Location</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                @foreach($country->partnerSchools as $school)
+                                <tr>
+                                    <td>{{ $school->name }}</td>
+                                    <td><a href="{{ $school->website }}" target="_blank" style="color:black">{{ $school->website }}</a></td>
+                                    <td>{{ $school->location }}</td>
+                                    <td><a href="{{ route('fe.school.detail',['name'=>$school->slug]) }}" style="color:black">Detail</a></td>
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     @foreach($country->visas as $visa)
                         <div class="content-section" id="visa-{{ $visa->id }}" data-aos="fade-up">
                              {!! $visa->content !!}

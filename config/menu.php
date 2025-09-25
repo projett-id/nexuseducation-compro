@@ -8,6 +8,12 @@ return [
         'permission' => null,
     ],
     [
+        'title' => 'About',
+        'icon'  => 'bi bi-archive',
+        'route' => 'about.form',
+        'permission' => 'about.form',
+    ],
+    [
         'title' => 'Country',
         'icon'  => 'bi bi-flag',
         'route' => 'country.index',

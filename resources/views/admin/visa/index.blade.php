@@ -39,7 +39,9 @@
         </tbody>
     </table>
 
-    {{ $data->links() }}
+    </div>
+    <div class="card-footer">
+        {{ $data->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

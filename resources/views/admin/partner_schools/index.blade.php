@@ -18,7 +18,10 @@
         <thead>
             <tr>
                 <th>Country</th>
-                <th>Section</th>
+                <th>Name</th>
+                <th>Logo</th>
+                <th>Website</th>
+                <th>Location</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -26,7 +29,10 @@
             @foreach($data as $dt)
                 <tr>
                     <td>{{ $dt->country->name }}</td>
-                    <td>{{ $dt->title }}</td>
+                    <td>{{ $dt->name }}</td>
+                    <td><img src="{{ asset('storage/'.$dt->logo) }}" class="mt-2" width="150"></td>
+                    <td>{{ $dt->website }}</td>
+                    <td>{{ $dt->location }}</td>
                     <td>
                         <a href="{{ route('partner-school.edit', $dt) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('partner-school.destroy', $dt) }}" method="POST" style="display:inline-block;">
@@ -39,7 +45,7 @@
         </tbody>
     </table>
 
-    {{ $data->links() }}
+    {{ $data->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

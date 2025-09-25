@@ -35,11 +35,11 @@
                       <p class="event-description">{{ \Illuminate\Support\Str::limit(strip_tags($dt->description), 255, '...') }}</p>
                       <div class="event-footer">
                         <div class="instructor">
-                          <img src="assets/img/person/person-f-8.webp" alt="Instructor" class="instructor-avatar">
+                          <!-- <img src="assets/img/person/person-f-8.webp" alt="Instructor" class="instructor-avatar"> -->
                           <span>{{ $dt->organizer->name}}</span>
                         </div>
                         <div class="event-price">
-                          <span class="price">$49</span>
+                          <span class="price">Free</span>
                         </div>
                       </div>
                       <div class="event-actions">

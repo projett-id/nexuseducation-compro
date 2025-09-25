@@ -40,11 +40,7 @@
   </div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row g-4 justify-content-center">
-      <p style="text-align: justify;">
-        <span style='color:#023382;font-weight:bold'>Nexus</span> <span style='color:#fdb515;font-weight:bold'>Education</span> is not new to the game, only to the name. Led by a core team with over 27 years in the industry, we’ve supported thousands of Indonesian students in securing placements at top global institutions.
-        <br>
-        Now, as <span style='color:#023382;font-weight:bold'>Nexus</span> <span style='color:#fdb515;font-weight:bold'>Education</span>, we are renewing our brand to better reflect the next generation of students we serve, while maintaining the same trusted commitment to families, schools, and partners. We bring together deep experience with a modern approach to make global education more accessible, personal, and effective.
-      </p>
+        {!! nl2br(e($about->about)) !!}
     </div>
   </div>
 </section>
@@ -60,34 +56,25 @@
       <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
         <div class="mission-card">
           <h3 class="text-center">Mission</h3>
-          <p>
-            At <span style='color:#023382;font-weight:bold'>Nexus</span> <span style='color:#fdb515;font-weight:bold'>Education</span>, our mission is to empower Indonesian students to pursue their academic aspirations with clarity, care, and confidence. We provide personalized guidance, expert advice, and end-to-end support to help each student access the right global education pathway.
-            <br><br>By working closely with families and schools, we ensure every journey is well-informed, well-prepared, and aligned with each student’s potential and purpose.
-          </p>
+          {!! nl2br(e($about->mission)) !!}
         </div>
       </div>
       <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
         <div class="mission-card">
           <h3 class="text-center">Vision</h3>
-          <p>To become the most trusted guide connecting Indonesian students to global education, ensuring every journey begins with clarity, care, and confidence.</p>
+          {!! nl2br(e($about->vision)) !!}
         </div>
       </div>
       <div class="col-lg-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
         <div class="mission-card text-center row">
           <h3>Values</h3>
           <p class="mb-5">What matters to us, and to you?</p>
+          @foreach($about->values as $vl)
           <div class="col-md-4">
-            <img src="https://icons-pbl.davooda.com/basic3d-icons/png-256px/b3d-storage-portfolio-dark-design-icon.png" style="width: 60%;height:130px">
-            <h5 class="mt-3">Professionalism</h5>
+              <img src="{{ asset('storage/values/'.$vl['img']) }}" style="width: 60%;height:150px">
+              <h5 class="mt-3">{{$vl['name']}}</h5>
           </div>
-          <div class="col-md-4">
-            <img src="https://www.nicepng.com/png/full/35-355140_graduation-hat-png-free-graduation-cap-png-vector.png" style="width: 50%;height:130px">
-            <h5 class="mt-3">Student-Centricity</h5>
-          </div>
-          <div class="col-md-4">
-            <img src="https://cdn-icons-png.flaticon.com/256/4450/4450698.png" style="width: 50%;height:130px">
-            <h5 class="mt-3">Integrity</h5>
-          </div>
+          @endforeach
         </div>
       </div>
     </div>

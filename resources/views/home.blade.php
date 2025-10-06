@@ -47,22 +47,22 @@
 
 <section id="course-categories" class="course-categories section">
   <div class="container section-title" data-aos="fade-up">
-    <h2>Our Mission & Vision</h2>
+    <h2>Our Vision & Mission </h2>
     <p>What drives us to do this work?</p>
   </div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row g-4 justify-content-center">
       <!-- <div class="row mt-5 pt-4"> -->
-      <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-        <div class="mission-card">
-          <h3 class="text-center">Mission</h3>
-          {!! nl2br(e($about->mission)) !!}
-        </div>
-      </div>
       <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
         <div class="mission-card">
           <h3 class="text-center">Vision</h3>
           {!! nl2br(e($about->vision)) !!}
+        </div>
+      </div>
+      <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+        <div class="mission-card">
+          <h3 class="text-center">Mission</h3>
+          {!! nl2br(e($about->mission)) !!}
         </div>
       </div>
       <div class="col-lg-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">

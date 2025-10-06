@@ -65,24 +65,30 @@
           {!! nl2br(e($about->mission)) !!}
         </div>
       </div>
-      <div class="col-lg-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-        <div class="mission-card text-center row">
-          <h3>Values</h3>
-          <p class="mb-5">What matters to us, and to you?</p>
-          @foreach($about->values as $vl)
-          <div class="col-md-4">
+    </div>
+  </div>
+</section>
+<section id="course-categories" class="course-categories section">
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Our Values </h2>
+    <p>What matters to us, and to you?</p>
+  </div>
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-8 row">
+        @foreach($about->values as $vl)
+          <div class="col-md-4 text-center">
               <img src="{{ asset('storage/values/'.$vl['img']) }}" style="width: 60%;height:150px">
               <h5 class="mt-3">{{$vl['name']}}</h5>
           </div>
           @endforeach
-        </div>
       </div>
     </div>
     <!-- </div> -->
   </div>
 </section>
 
-<section id="course-categories" class="course-categories section light-background">
+<section id="course-categories" class="course-categories section light-background mt-3">
   <div class="container section-title" data-aos="fade-up">
     <h2>Our Services</h2>
   </div>

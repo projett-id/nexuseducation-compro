@@ -23,9 +23,86 @@
             </select>
             @error('status') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
+        <div id="sections-container">
+            <h4>Sections</h4>
+            <div class="sections">
+                <div class="section-group mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-11">
+                                    <div class="form-group">
+                                        <label>Section Name</label>
+                                        <input type="text" name="sections[0][name]" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="sections[0][description]" class="form-control tinymce" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-danger remove-section" style="display:none;">
+                                        <small>x</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success" id="add-section">
+                <i class="fas fa-plus"></i> Add Section
+            </button>
+        </div>
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
 @endsection
+@push('scripts')  
+<script src="https://cdn.tiny.cloud/1/wzom1ixn5sqob8678qukkfdqdosyzir7lsex72s09gyngyww/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea.tinymce',
+        height: 400,
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak code fullscreen insertdatetime media table emoticons',
+        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code fullscreen',
+        menubar: false,
+        content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let sectionCount = 1;
+    
+    document.getElementById('add-section').addEventListener('click', function() {
+        const sectionsDiv = document.querySelector('.sections');
+        const newSection = document.querySelector('.section-group').cloneNode(true);
+        
+        // Update input names
+        newSection.querySelectorAll('input, textarea').forEach(input => {
+            input.name = input.name.replace('[0]', `[${sectionCount}]`);
+            input.value = '';
+        });
+        
+        // Show remove button
+        newSection.querySelector('.remove-section').style.display = 'block';
+        
+        sectionsDiv.appendChild(newSection);
+        sectionCount++;
+        
+        // Add remove functionality
+        newSection.querySelector('.remove-section').addEventListener('click', function() {
+            newSection.remove();
+        });
+    });
+    
+    // Show remove button if there's more than one section
+    document.querySelectorAll('.section-group').forEach((section, index) => {
+        if (index > 0) {
+            section.querySelector('.remove-section').style.display = 'block';
+        }
+    });
+});
+</script>

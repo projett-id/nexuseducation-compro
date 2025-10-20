@@ -25,4 +25,9 @@ class Country extends Model
     {
         return $this->hasMany(PartnerSchool::class, 'country_id');
     }
+
+    public function sections()
+    {
+        return $this->hasMany(CountrySection::class);
+    }
 }

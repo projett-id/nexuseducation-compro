@@ -27,13 +27,26 @@ class CountryController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255|unique:countries,name',
             'flag' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'sections.*.name' => 'required|string|max:255',
+            'sections.*.description' => 'required|string',
         ]);
 
         if ($request->hasFile('flag')) {
             $data['flag'] = $request->file('flag')->store('flag', 'public');
         }
 
-        Country::create($data);
+        $country = Country::create($request->except('sections'));
+
+        if ($request->has('sections')) {
+            foreach ($request->sections as $section) {
+                $country->sections()->create([
+                    'country_id' => $country->id,
+                    'section_name' => $section['name'],
+                    'description' => $section['description'],
+                ]);
+            }
+        }
+
 
         return redirect()->route('country.index')->with('success', 'Country created successfully.');
     }
@@ -47,6 +60,8 @@ class CountryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255|unique:countries,name,' . $country->id,
+            'sections.*.name' => 'required|string|max:255',
+            'sections.*.description' => 'required|string',
         ]);
 
         if ($request->hasFile('flag')) {
@@ -56,8 +71,17 @@ class CountryController extends Controller
             $data['flag'] = $request->file('flag')->store('flag', 'public');
         }
 
-        $country->update($data);
-
+        $country->update($request->except('sections'));
+        $country->sections()->delete(); 
+        
+        if ($request->has('sections')) {
+            foreach ($request->sections as $section) {
+                $country->sections()->create([
+                    'section_name' => $section['name'],
+                    'description' => $section['description'],
+                ]);
+            }
+        }
         return redirect()->route('country.index')->with('success', 'Country updated successfully.');
     }
 

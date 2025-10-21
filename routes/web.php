@@ -12,7 +12,7 @@ use App\Http\Controllers\Backoffice\PermissionController;
 use App\Http\Controllers\Backoffice\UserController;
 use App\Http\Controllers\Backoffice\NewsController;
 use App\Http\Controllers\Backoffice\EventController;
-
+use App\Http\Controllers\Backoffice\TestimonialsController;
 use App\Http\Controllers\Backoffice\CountryController;
 use App\Http\Controllers\Backoffice\CategoryController;
 use App\Http\Controllers\Backoffice\TagController;
@@ -80,6 +80,7 @@ Route::prefix('backoffice')
         Route::resource('event', EventController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
+        Route::resource('testimonials', TestimonialsController::class);
         Route::get('data-journey', [HomeController::class,'listJourney'])->name('data-journey');
         Route::get('data-partner', [HomeController::class,'listPartner'])->name('data-partner');
 });

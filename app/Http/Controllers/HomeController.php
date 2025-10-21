@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\StartYourJourney;
 use App\Models\PartnerWithUs;
 use App\Models\About;
+use App\Models\Testimonial;
 class HomeController extends Controller
 {
     public function index()
@@ -17,7 +18,8 @@ class HomeController extends Controller
         $countries = Country::all();
         $event = Event::all();
         $news = News::all();
-        return view('home',compact('countries','event','news','about'));
+        $testimonial = Testimonial::all();
+        return view('home',compact('countries','event','news','about','testimonial'));
     }   
 
     public function about()

@@ -43,8 +43,10 @@
                         </div>
                       </div>
                       <div class="event-actions">
-                        <a href="#" class="btn btn-primary">Register Now</a>
-                        <a href="{{ route('fe.event.detail',['slug'=>$dt->slug])}}" class="btn btn-outline">Detail</a>
+                        <a href="https://wa.me/628159993255?text={{ urlencode('Halo, saya tertarik dan ingin mengikuti event ' . $dt->title) }}" target="_blank" class="btn btn-primary">
+                            Register Now
+                        </a>
+
                       </div>
                     </div>
                   </div>

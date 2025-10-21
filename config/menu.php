@@ -61,6 +61,12 @@ return [
         'route' => 'data-journey',
         'permission' => 'data-journey',
     ],
+     [
+        'title' => 'Testimoni',
+        'icon'  => 'bi bi-database',
+        'route' => 'testimonials.index',
+        'permission' => 'testimoni.view',
+    ],
     [
         'title' => 'Sysadmin',
         'icon'  => 'bi bi-gear',

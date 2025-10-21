@@ -12,7 +12,7 @@ class VisaController extends Controller
 {
     public function index()
     {
-        $data = Visa::latest()->paginate(10);
+        $data = Visa::latest()->get();
         return view('admin.visa.index', compact('data'));
     }
 

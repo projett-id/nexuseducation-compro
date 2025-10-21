@@ -6,7 +6,7 @@
         <h3 class="card-title">Data Journey</h3>
     </div>
     <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatables">
             <thead>
                 <tr>
                     <th>Name</th>

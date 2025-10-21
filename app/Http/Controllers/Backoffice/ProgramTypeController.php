@@ -12,7 +12,7 @@ class ProgramTypeController extends Controller
 {
     public function index()
     {
-        $data = ProgramTypes::latest()->paginate(10);
+        $data = ProgramTypes::latest()->get();
         return view('admin.program_types.index', compact('data'));
     }
 

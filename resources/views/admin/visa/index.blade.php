@@ -14,7 +14,7 @@
     @endif
 
     <div class="card-body">
-       <table class="table table-bordered">
+       <table class="table table-bordered datatables">
         <thead>
             <tr>
                 <th>Country</th>
@@ -38,10 +38,6 @@
             @endforeach
         </tbody>
     </table>
-
-    </div>
-    <div class="card-footer">
-        {{ $data->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

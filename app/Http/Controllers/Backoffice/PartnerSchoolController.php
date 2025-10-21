@@ -15,7 +15,7 @@ class PartnerSchoolController extends Controller
 {
     public function index()
     {
-        $data = PartnerSchool::latest()->paginate(10);
+        $data = PartnerSchool::latest()->get();
         return view('admin.partner_schools.index', compact('data'));
     }
 

@@ -14,32 +14,30 @@
     @endif
 
     <div class="card-body">
-       <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Country</th>
-                <th>Section</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $dt)
+       <table class="table table-bordered datatables">
+            <thead>
                 <tr>
-                    <td>{{ $dt->country->name }}</td>
-                    <td>{{ $dt->title }}</td>
-                    <td>
-                        <a href="{{ route('program-types.edit', $dt) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('program-types.destroy', $dt) }}" method="POST" style="display:inline-block;">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this data?')">Delete</button>
-                        </form>
-                    </td>
+                    <th>Country</th>
+                    <th>Section</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    {{ $data->links('pagination::bootstrap-5') }}
+            </thead>
+            <tbody>
+                @foreach($data as $dt)
+                    <tr>
+                        <td>{{ $dt->country->name }}</td>
+                        <td>{{ $dt->title }}</td>
+                        <td>
+                            <a href="{{ route('program-types.edit', $dt) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('program-types.destroy', $dt) }}" method="POST" style="display:inline-block;">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this data?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

@@ -16,7 +16,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $event = Event::with('tags')->latest()->paginate(1);
+        $event = Event::with('tags')->latest()->get();
         return view('admin.event.index', compact('event'));
     }
 

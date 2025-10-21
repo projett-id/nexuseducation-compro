@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered datatables">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -40,9 +40,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="mt-2">
-            {{ $users->links('pagination::bootstrap-5') }}
-        </div>
     </div>
 </div>
 @endsection

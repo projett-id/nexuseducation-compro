@@ -14,7 +14,7 @@
     @endif
 
     <div class="card-body">
-       <table class="table table-bordered">
+       <table class="table table-bordered datatables">
         <thead>
             <tr>
                 <th>#</th><th>Name</th><th>Slug</th><th>Action</th>
@@ -38,9 +38,6 @@
         </tbody>
     </table>
 
-    </div>
-    <div class="card-footer">
-        {{ $tags->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

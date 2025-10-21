@@ -14,38 +14,36 @@
     @endif
 
     <div class="card-body">
-       <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Country</th>
-                <th>Name</th>
-                <th>Logo</th>
-                <th>Website</th>
-                <th>Location</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $dt)
+       <table class="table table-bordered datatables">
+            <thead>
                 <tr>
-                    <td>{{ $dt->country->name }}</td>
-                    <td>{{ $dt->name }}</td>
-                    <td><img src="{{ asset('storage/'.$dt->logo) }}" class="mt-2" width="150"></td>
-                    <td>{{ $dt->website }}</td>
-                    <td>{{ $dt->location }}</td>
-                    <td>
-                        <a href="{{ route('partner-school.edit', $dt) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('partner-school.destroy', $dt) }}" method="POST" style="display:inline-block;">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this data?')">Delete</button>
-                        </form>
-                    </td>
+                    <th>Country</th>
+                    <th>Name</th>
+                    <th>Logo</th>
+                    <th>Website</th>
+                    <th>Location</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    {{ $data->links('pagination::bootstrap-5') }}
+            </thead>
+            <tbody>
+                @foreach($data as $dt)
+                    <tr>
+                        <td>{{ $dt->country->name }}</td>
+                        <td>{{ $dt->name }}</td>
+                        <td><img src="{{ asset('storage/'.$dt->logo) }}" class="mt-2" width="150"></td>
+                        <td>{{ $dt->website }}</td>
+                        <td>{{ $dt->location }}</td>
+                        <td>
+                            <a href="{{ route('partner-school.edit', $dt) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('partner-school.destroy', $dt) }}" method="POST" style="display:inline-block;">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this data?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

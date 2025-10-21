@@ -6,7 +6,7 @@
         <h3 class="card-title">Data Partner</h3>
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped datatables">
             <thead>
                 <tr>
                     <th>Name</th>

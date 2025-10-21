@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-bordered datatables">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -39,9 +39,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
-    <div class="card-footer">
-        {{ $event->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

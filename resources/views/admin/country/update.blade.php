@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="sections[{{$key}}][description]" class="form-control" 
+                                            <textarea name="sections[{{$key}}][description] tinymce" class="form-control" 
                                                 rows="3">{{ $section->description }}</textarea>
                                             @error("sections.{$key}.description") 
                                                 <small class="text-danger">{{ $message }}</small> 
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="sections[0][description]" class="form-control" rows="3"></textarea>
+                                            <textarea name="sections[0][description]" class="form-control tinymce" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-1">

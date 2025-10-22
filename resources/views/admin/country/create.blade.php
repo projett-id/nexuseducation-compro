@@ -61,17 +61,6 @@
 </div>
 @endsection
 @push('scripts')  
-<script src="https://cdn.tiny.cloud/1/wzom1ixn5sqob8678qukkfdqdosyzir7lsex72s09gyngyww/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea.tinymce',
-        height: 400,
-        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak code fullscreen insertdatetime media table emoticons',
-        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code fullscreen',
-        menubar: false,
-        content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
-    });
-</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     let sectionCount = 1;

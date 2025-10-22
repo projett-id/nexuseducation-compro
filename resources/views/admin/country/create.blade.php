@@ -31,20 +31,20 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-11">
-                                    <div class="form-group">
-                                        <label>Section Name</label>
-                                        <input type="text" name="sections[0][name]" class="form-control" required>
+                                        <div class="form-group mb-3">
+                                            <label>Section Name</label>
+                                            <input type="text" name="sections[0][name]" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="sections[0][description]" class="tinymce" rows="3"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea name="sections[0][description]" class="form-control tinymce" rows="3"></textarea>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-danger remove-section" style="display:none;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="col-1">
-                                    <button type="button" class="btn btn-danger remove-section" style="display:none;">
-                                        <small>x</small>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,3 +95,4 @@
     });
 });
 </script>
+@endpush

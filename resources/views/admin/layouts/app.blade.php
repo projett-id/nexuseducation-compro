@@ -131,7 +131,7 @@
     <script>
         tinymce.init({
             selector: 'textarea.tinymce',
-            height: 800,
+            height: 400,
             plugins: 'advlist autolink lists link image charmap preview anchor pagebreak code fullscreen insertdatetime media table emoticons',
             toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code fullscreen',
             menubar: false,

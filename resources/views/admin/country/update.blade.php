@@ -48,8 +48,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="sections[{{$key}}][description]" class="tinymce" 
-                                                rows="3">{{ $section->description }}</textarea>
+                                            <textarea id="tinymce_{{$key}}" name="sections[{{$key}}][description]" class="tinymce" rows="3">{{ $section->description }}</textarea>
                                             @error("sections.{$key}.description") 
                                                 <small class="text-danger">{{ $message }}</small> 
                                             @enderror
@@ -77,7 +76,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="sections[0][description]" class="tinymce" rows="3"></textarea>
+                                            <textarea id="tinymce_0" name="sections[0][description]" class="tinymce" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-1">
@@ -91,7 +90,8 @@
                     </div>
                 @endforelse
             </div>
-            <button type="button" class="btn btn-success" id="add-section">
+
+            <button type="button" class="btn btn-success mt-2" id="add-section">
                 <i class="fas fa-plus"></i> Add Section
             </button>
         </div>
@@ -100,40 +100,85 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
 </form>
+
+<!-- Template Section (hidden) -->
+<div id="section-template" style="display:none;">
+    <div class="section-group mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-11">
+                        <div class="form-group mb-3">
+                            <label>Section Name</label>
+                            <input type="text" name="sections[__INDEX__][name]" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="tinymce___INDEX__" name="sections[__INDEX__][description]" class="tinymce" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-danger remove-section">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+    // 🔹 Inisialisasi TinyMCE untuk semua textarea awal
+    function initTinyBySelector(selector) {
+        tinymce.init({
+            selector: selector,
+            height: 400,
+            plugins: 'advlist autolink lists link image charmap preview anchor pagebreak code fullscreen insertdatetime media table emoticons',
+            toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code fullscreen',
+            menubar: false,
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+        });
+    }
+
+    initTinyBySelector('.tinymce');
+
     let sectionCount = {{ $country->sections->count() ?: 1 }};
-    
+
+    const sectionsContainer = document.querySelector('.sections');
+    const template = document.getElementById('section-template').innerHTML;
+
+    // 🔹 Tambah section baru
     document.getElementById('add-section').addEventListener('click', function() {
-        const sectionsDiv = document.querySelector('.sections');
-        const newSection = document.querySelector('.section-group').cloneNode(true);
-        
-        // Update input names and clear values
-        newSection.querySelectorAll('input, textarea').forEach(input => {
-            input.name = input.name.replace(/\[\d+\]/, `[${sectionCount}]`);
-            input.value = '';
-        });
-        
-        // Show remove button
-        newSection.querySelector('.remove-section').style.display = 'block';
-        
-        sectionsDiv.appendChild(newSection);
+        const index = sectionCount;
+        const html = template.replace(/__INDEX__/g, index);
+
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html.trim();
+        const newSection = wrapper.firstElementChild;
+        sectionsContainer.appendChild(newSection);
+
+        // Inisialisasi TinyMCE untuk textarea baru
+        const textareaId = `tinymce_${index}`;
+        initTinyBySelector(`#${textareaId}`);
+
         sectionCount++;
-        
-        // Add remove functionality
-        newSection.querySelector('.remove-section').addEventListener('click', function() {
-            newSection.remove();
-        });
     });
-    
-    // Add remove functionality to existing remove buttons
-    document.querySelectorAll('.remove-section').forEach(button => {
-        button.addEventListener('click', function() {
-            this.closest('.section-group').remove();
-        });
+
+    // 🔹 Hapus section (dengan hapus editor TinyMCE-nya)
+    sectionsContainer.addEventListener('click', function(e) {
+        if (e.target.closest('.remove-section')) {
+            const sectionGroup = e.target.closest('.section-group');
+            const textarea = sectionGroup.querySelector('textarea');
+            if (textarea && textarea.id && tinymce.get(textarea.id)) {
+                tinymce.get(textarea.id).remove();
+            }
+            sectionGroup.remove();
+        }
     });
 });
 </script>

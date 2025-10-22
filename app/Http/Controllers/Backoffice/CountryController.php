@@ -30,12 +30,12 @@ class CountryController extends Controller
             'sections.*.name' => 'required|string|max:255',
             'sections.*.description' => 'required|string',
         ]);
-
+        $data = $request->except('sections','flag');
         if ($request->hasFile('flag')) {
             $data['flag'] = $request->file('flag')->store('flag', 'public');
         }
 
-        $country = Country::create($request->except('sections'));
+        $country = Country::create($data);
 
         if ($request->has('sections')) {
             foreach ($request->sections as $section) {
@@ -63,15 +63,15 @@ class CountryController extends Controller
             'sections.*.name' => 'required|string|max:255',
             'sections.*.description' => 'required|string',
         ]);
+        $data = $request->except('sections','flag');
 
         if ($request->hasFile('flag')) {
             if ($country->flag && \Storage::disk('public')->exists($country->flag)) {
                 \Storage::disk('public')->delete($country->flag);
             }
-            $data['flag'] = $request->file('flag')->store('flag', 'public');
+            $data['flag']=$request->file('flag')->store('flag', 'public');
         }
-
-        $country->update($request->except('sections'));
+        $country->update($data);
         $country->sections()->delete(); 
         
         if ($request->has('sections')) {

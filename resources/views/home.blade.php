@@ -171,7 +171,7 @@
     <div class="row g-4 justify-content-center">
       @foreach($countries as $country)
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
-        <a href="{{route('fe.country.detail',['name'=>$country->name]) }}" class="category-card category-tech">
+        <a href="{{route('fe.country.detail',['name'=>Illuminate\Support\Str::slug($country->name)]) }}" class="category-card category-tech">
           <div class="category-icon" style="
                 background: url('{{asset('storage/'.$country->flag)}}');
                 background-repeat: no-repeat;

@@ -94,7 +94,7 @@ class CountryController extends Controller
     public function detailFE($name)
     {
         $countryName = str_replace('-', ' ', $name);
-        $country = Country::whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [Str::lower($countryName)])->with(['visas', 'programs'])->firstOrFail();
+        $country = Country::whereRaw('LOWER(name) = ?', [Str::lower($countryName)])->where('status',1)->with(['visas', 'programs'])->firstOrFail();
         return view('frontend.country.detail', compact('country'));
     }
 }

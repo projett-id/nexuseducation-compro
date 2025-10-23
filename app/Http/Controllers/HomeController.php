@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $about = About::first();
-        $countries = Country::all();
+        $countries = Country::where('status', 1)->get();
         $event = Event::all();
         $news = News::all();
         $testimonial = Testimonial::all();

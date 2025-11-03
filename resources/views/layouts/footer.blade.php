@@ -23,11 +23,9 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>Ruko Beryl 2 No. 9, Gading Serpong</p>
-          <p>Tangerang 15810</p>
-          <p>Indonesia</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>0815 999 3255</span></p>
-          <p><strong>Email:</strong> <span>nexuseducationstudyabroad@gmail.com</span></p>
+          <p>{{$footerData->address}}</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>{{$footerData->contact_no}}</span></p>
+          <p><strong>Email:</strong> <span>{{$footerData->email}}</span></p>
         </div>
 
       </div>
